@@ -1,5 +1,8 @@
-import 'package:DevQuiz/home/widgets/level_button/level_button_widget.dart';
-import 'package:DevQuiz/home/widgets/quiz_card/quiz_card_widget.dart';
+import 'package:quiz_dev/core/core.dart';
+import 'package:quiz_dev/home/home_controller.dart';
+import 'package:quiz_dev/home/home_state.dart';
+import 'package:quiz_dev/home/widgets/level_button/level_button_widget.dart';
+import 'package:quiz_dev/home/widgets/quiz_card/quiz_card_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/appbar/app_bar.dart';
@@ -11,6 +14,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final controller = HomeController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller.getUser();
+    controller.getQuizzes();
+
+    controller.stateNotifier.addListener(() {
+      setState(() {});
+    });
+  }
 
   Widget _levelCards() {
     return Row(
@@ -34,33 +50,40 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBarWidget(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          children: [
-            SizedBox(height: 24,),
-            _levelCards(),
-            SizedBox(height: 24,),
-            Expanded(
-              child: GridView.count(
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                crossAxisCount: 2,
-                children: [
-                  QuizCardWidget(),
-                  QuizCardWidget(),
-                  QuizCardWidget(),
-                  QuizCardWidget(),
-                  QuizCardWidget(),
-                  QuizCardWidget(),
-                ],
-              ),
-            )
-          ],
+    if (controller.state == HomeState.Success) {
+      return Scaffold(
+        appBar: AppBarWidget(user: controller.user!),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            children: [
+              SizedBox(height: 24,),
+              _levelCards(),
+              SizedBox(height: 24,),
+              Expanded(
+                child: GridView.count(
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                  crossAxisCount: 2,
+                  children: controller.quizzes!.map((quiz) {
+                    return QuizCardWidget(
+                      completed: quiz.questionsAnswered,
+                      title: quiz.title,
+                      totalQuestions: quiz.questions.length,
+                    );
+                  }).toList(),
+                ),
+              )
+            ],
+          ),
         ),
-      ),
+      );
+    }
+
+    return Scaffold(
+      body: Center(child: CircularProgressIndicator(
+        valueColor: AlwaysStoppedAnimation<Color>(AppColors.darkGreen),
+      ),)
     );
   }
 }
