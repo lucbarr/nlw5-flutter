@@ -35,4 +35,6 @@ class AppColors {
   static final Color levelButtonTextMedio = darkGreen;
   static final Color levelButtonTextDificil = Color(0xFFE8891C);
   static final Color levelButtonTextPerito = darkRed;
+
+  static final Color defaultCardBorder = Color(0xFFE1E1E6);
 }
