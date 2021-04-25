@@ -1,10 +1,14 @@
 import 'package:quiz_dev/core/app_gradients.dart';
 import 'package:quiz_dev/core/app_images.dart';
 import 'package:flutter/material.dart';
+import 'package:quiz_dev/home/home_page.dart';
 
 class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration(seconds: 2)).then((_) => Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (contex) => HomePage())));
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(

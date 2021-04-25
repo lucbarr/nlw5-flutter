@@ -1,3 +1,4 @@
+import 'package:quiz_dev/challenge/challenge_page.dart';
 import 'package:quiz_dev/core/core.dart';
 import 'package:quiz_dev/home/home_controller.dart';
 import 'package:quiz_dev/home/home_state.dart';
@@ -33,16 +34,16 @@ class _HomePageState extends State<HomePage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         LevelButtonWidget(
-          type: LevelButtonType.Easy,
+          type: LevelButtonType.easy,
         ),
         LevelButtonWidget(
-          type: LevelButtonType.Hard,
+          type: LevelButtonType.hard,
         ),
         LevelButtonWidget(
-          type: LevelButtonType.Medium,
+          type: LevelButtonType.medium,
         ),
         LevelButtonWidget(
-          type: LevelButtonType.Pro,
+          type: LevelButtonType.pro,
         ),
       ],
     );
@@ -57,9 +58,9 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             children: [
-              SizedBox(height: 24,),
+              SizedBox(height: 24),
               _levelCards(),
-              SizedBox(height: 24,),
+              SizedBox(height: 24),
               Expanded(
                 child: GridView.count(
                   crossAxisSpacing: 16,
@@ -67,6 +68,13 @@ class _HomePageState extends State<HomePage> {
                   crossAxisCount: 2,
                   children: controller.quizzes!.map((quiz) {
                     return QuizCardWidget(
+                      onTap: (){
+                        Navigator.push(context,
+                          MaterialPageRoute(
+                            builder: (context) => ChallengePage(questions: quiz.questions, quizTitle: quiz.title)
+                          )
+                        );
+                      },
                       completed: quiz.questionsAnswered,
                       title: quiz.title,
                       totalQuestions: quiz.questions.length,

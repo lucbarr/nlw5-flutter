@@ -1,22 +1,22 @@
 import 'dart:convert';
 
 enum Level {
-  Easy,
-  Medium,
-  Hard,
-  Pro
+  easy,
+  medium,
+  hard,
+  pro
 }
 
 extension LevelStringExt on String {
-  Level get levelParse => {"easy": Level.Easy, "medium": Level.Medium, "hard": Level.Hard, "pro": Level.Pro}[this]!;
+  Level get levelParse => {"easy": Level.easy, "medium": Level.medium, "hard": Level.hard, "pro": Level.pro}[this]!;
 }
 
 extension LevelExt on Level {
   String get parsed => {
-    Level.Easy: "easy",
-    Level.Medium: "medium",
-    Level.Hard: "hard",
-    Level.Pro: "pro",
+    Level.easy: "easy",
+    Level.medium: "medium",
+    Level.hard: "hard",
+    Level.pro: "pro",
     }[this]!;
 }
 

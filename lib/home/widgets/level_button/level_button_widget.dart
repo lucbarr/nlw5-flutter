@@ -2,13 +2,6 @@ import 'package:quiz_dev/core/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-//enum LevelButtonType {
-//  Easy,
-//  Medium,
-//  Hard,
-//  Pro
-//}
-
 class LevelButtonType {
 
   final String label;
@@ -16,26 +9,26 @@ class LevelButtonType {
   final Color textColor;
   final Color backgroundColor;
 
-  static final Easy = LevelButtonType(
-    "Easy",
+  static final easy = LevelButtonType(
+    "easy",
     AppColors.levelButtonBorderFacil,
     AppColors.levelButtonTextFacil,
     AppColors.levelButtonFacil
   );
-  static final Medium = LevelButtonType(
-    "Medium",
+  static final medium = LevelButtonType(
+    "medium",
     AppColors.levelButtonBorderMedio,
     AppColors.levelButtonTextMedio,
     AppColors.levelButtonMedio
   );
-  static final Hard = LevelButtonType(
-    "Hard",
+  static final hard = LevelButtonType(
+    "hard",
     AppColors.levelButtonBorderDificil,
     AppColors.levelButtonTextDificil,
     AppColors.levelButtonDificil
   );
-  static final Pro = LevelButtonType(
-    "Pro",
+  static final pro = LevelButtonType(
+    "pro",
     AppColors.levelButtonBorderPerito,
     AppColors.levelButtonTextPerito,
     AppColors.levelButtonPerito
